@@ -1,7 +1,7 @@
 const express = require('express')
 const cors    = require('cors')
 const scrapeReddit  = require('./data/reddit.js')
-const routes = require('./Routes/routes')
+const routes = require('./routes/routes')
 const path = require('path')
 require('dotenv').config()
 
