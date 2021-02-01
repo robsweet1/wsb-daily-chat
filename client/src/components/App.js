@@ -4,11 +4,11 @@ import Navbar from './Navbar'
 import '../app.css'
 
 const App = () => {
-  const [oldest, setOldest] = useState([])
-  const [older, setOlder] = useState([])
-  const [middle, setMiddle] = useState([])
-  const [younger, setYounger] = useState([])
-  const [youngest, setYoungest] = useState([])
+  const [amc, setAmc] = useState([])
+  const [gme, setGme] = useState([])
+  const [nok, setNok] = useState([])
+  const [bb, setBb] = useState([])
+  const [other, setOther] = useState([])
 
   useEffect(() => {
     const source = new EventSource('http://localhost:5000/api')
@@ -16,11 +16,11 @@ const App = () => {
     source.onmessage = event => {
       const data = JSON.parse(event.data)
       console.log(data)
-      setOldest(data['5000_days'].reverse())
-      setOlder(data['2000_days'].reverse())
-      setMiddle(data['1000_days'].reverse())
-      setYounger(data['500_days'].reverse())
-      setYoungest(data['100_days'].reverse())
+      setAmc(data['AMC'])
+      setGme(data['GME'])
+      setNok(data['NOK'])
+      setBb(data['BB'])
+      setOther(data['OTHER'])
     }
   }, [])
 
@@ -29,11 +29,11 @@ const App = () => {
     <div className='container'>
       <Navbar />
       <div className='columns-container'>
-        <CommentColumn comments={oldest} title={'The Apostles'} />
-        <CommentColumn comments={older} title={'Over the Hill'} />
-        <CommentColumn comments={middle} title={'Mid life Crisis'} />
-        <CommentColumn comments={younger} title={'Young Buck'} />
-        <CommentColumn comments={youngest} title={'Baby'} />
+        <CommentColumn comments={amc} title={'AMC'} />
+        <CommentColumn comments={bb} title={'BB'} />
+        <CommentColumn comments={gme} title={'GME'} />
+        <CommentColumn comments={nok} title={'NOK'} />
+        <CommentColumn comments={other} title={'OTHER'} />
       </div>
     </div>
     </>
