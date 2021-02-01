@@ -15,8 +15,8 @@ async function scrapeReddit() {
         let stickyID = await r.getSubreddit('wallstreetbets').getSticky({num: 1}).id
         const comments = new CommentStream(r, {
             subreddit: 'wallstreetbets',
-            limit: 2,
-            pollTime: 2000,
+            limit: 5,
+            pollTime: 8000,
     
         })
         comments.on('item', async (item) => {

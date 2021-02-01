@@ -98,6 +98,13 @@ h2 {
     height: 20px;
 }
 
+.comment-author > a {
+    text-decoration: underline;
+    color: white;
+
+}
+
+
 .comment-author {
     position: absolute;
     top: 1px;
