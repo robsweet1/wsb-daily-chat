@@ -50,7 +50,7 @@ h2 {
 
 .backdrop {
     height: 228px;
-    background: url("https://styles.redditmedia.com/t5_2th52/styles/bannerBackgroundImage_b81p0rpipwd61.png?width=4000&s=fb434bb39163c7cd3f49a1d3ebfb36b0466575a6") center top / cover no-repeat rgb(0, 108, 189);
+    background: url('./assets/backdrop.png') center top / cover no-repeat rgb(0, 108, 189);
     width: 100vw;
     position: relative;
 }
