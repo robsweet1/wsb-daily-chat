@@ -43,6 +43,12 @@ h2 {
     display: inline-block;
     border-left: 1px solid white;
 }
+
+@media only screen and (max-width: 768px) {
+    .nav > a:link, a:visited {
+        padding: 12px 2vw;
+    }
+}
   
 .nav > a:hover, a:active {
     background-color: rgb(91, 156, 255);
@@ -82,6 +88,7 @@ h2 {
     display: flex;
     flex-direction: column;
     width: 15%;
+    min-width: 200px;
     margin: 2vh 0;
     padding: 0 2vw;
 }
@@ -103,7 +110,6 @@ h2 {
     color: white;
 
 }
-
 
 .comment-author {
     position: absolute;
@@ -132,5 +138,7 @@ h2 {
 .columns-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
