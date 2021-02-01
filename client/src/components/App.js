@@ -11,7 +11,7 @@ const App = () => {
   const [other, setOther] = useState([])
 
   useEffect(() => {
-    const source = new EventSource('http://localhost:5000/api')
+    const source = new EventSource('/api')
 
     source.onmessage = event => {
       const data = JSON.parse(event.data)
