@@ -29,6 +29,9 @@ async function scrapeReddit() {
         })
         comments.on('item', async (item) => {
             let newStickyId = await r.getSubreddit('wallstreetbets').getSticky({num: 1}).id
+            if(!sticky.title.toUpperCase().includes('DAILY')){
+                sticky = await r.getSubreddit('wallstreetbets').getSticky({num: 2})
+            }
             if (newStickyId !== newStickyId){
                 resetData()
                 stickyID = newStickyId
