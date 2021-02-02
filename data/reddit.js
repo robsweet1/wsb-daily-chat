@@ -12,7 +12,15 @@ async function scrapeReddit() {
     })
     r.config({ continueAfterRatelimitError: true })
     try{
-        let stickyID = await r.getSubreddit('wallstreetbets').getSticky({num: 1}).id
+        let sticky = await r.getSubreddit('wallstreetbets').getSticky({num: 1})
+        if(!sticky.title.toUpperCase().includes('DAILY')){
+            sticky = await r.getSubreddit('wallstreetbets').getSticky({num: 2})
+        }
+
+        sticky.comments.forEach(comment => {
+            sortByTerm(comment)
+        })
+        let stickyID = sticky.id
         const comments = new CommentStream(r, {
             subreddit: 'wallstreetbets',
             limit: 5,
@@ -38,6 +46,13 @@ async function scrapeReddit() {
 
 function sortByTerm(item) {
     try{
+        if(!CommentData['IDMap'][item.id]){
+            CommentData['IDMap'][item.id] = true
+            console.log(CommentData['IDMap'])
+        }
+        else{
+            return
+        }
         const date = new Date(item.created_utc * 1000)
         const hours = date.getHours()
         const minutes = '0' + date.getMinutes()
@@ -122,6 +137,7 @@ function sortByTerm(item) {
 // }
 
 function resetData() {
+    CommentData['IDMap'] = {}
     CommentData['AMC'] = []
     CommentData['GME'] = []
     CommentData['NOK'] = []

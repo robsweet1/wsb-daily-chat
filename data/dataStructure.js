@@ -1,4 +1,5 @@
 const CommentData = {
+    'IDMap': {},
     'AMC': [],
     'GME': [],
     'NOK': [],
