@@ -13,14 +13,16 @@ async function scrapeReddit() {
     r.config({ continueAfterRatelimitError: true })
     try{
         let sticky = await r.getSubreddit('wallstreetbets').getSticky({num: 1})
-        if(!sticky.title.toUpperCase().includes('DAILY')){
+        let stickyID = sticky.id
+        let stickyFlair = sticky.link_flair_text
+        if(stickyFlair !== 'Daily Discussion'){
             sticky = await r.getSubreddit('wallstreetbets').getSticky({num: 2})
+            stickyID = sticky.id
         }
 
         sticky.comments.forEach(comment => {
             sortByTerm(comment)
         })
-        let stickyID = sticky.id
         const comments = new CommentStream(r, {
             subreddit: 'wallstreetbets',
             limit: 5,
@@ -28,11 +30,14 @@ async function scrapeReddit() {
     
         })
         comments.on('item', async (item) => {
-            let newStickyId = await r.getSubreddit('wallstreetbets').getSticky({num: 1}).id
-            if(!sticky.title.toUpperCase().includes('DAILY')){
-                sticky = await r.getSubreddit('wallstreetbets').getSticky({num: 2})
+            let newSticky = await r.getSubreddit('wallstreetbets').getSticky({num: 1})
+            let newStickyID = newSticky.id
+            let newStickyFlair = newSticky.link_flair_text
+            if(newStickyFlair !== 'Daily Discussion'){
+                newSticky = await r.getSubreddit('wallstreetbets').getSticky({num: 2})
+                newStickyID = newSticky.id
             }
-            if (newStickyId !== newStickyId){
+            if (stickyId !== newStickyId){
                 resetData()
                 stickyID = newStickyId
             }
