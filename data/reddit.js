@@ -37,9 +37,9 @@ async function scrapeReddit() {
                 newSticky = await r.getSubreddit('wallstreetbets').getSticky({num: 2})
                 newStickyID = newSticky.id
             }
-            if (stickyId !== newStickyId){
+            if (stickyID !== newStickyID){
                 resetData()
-                stickyID = newStickyId
+                stickyID = newStickyID
             }
 
             if(item.link_id === `t3_${stickyID}`)
@@ -54,9 +54,9 @@ async function scrapeReddit() {
 
 function sortByTerm(item) {
     try{
+        console.log(item.id)
         if(!CommentData['IDMap'][item.id]){
             CommentData['IDMap'][item.id] = true
-            console.log(CommentData['IDMap'])
         }
         else{
             return
